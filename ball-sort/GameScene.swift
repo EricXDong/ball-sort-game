@@ -56,16 +56,32 @@ class GameScene: SKScene {
         
         //  Load sprite
         let sprite = SKSpriteNode(texture: texture)
-        sprite.position = ball.position
+        sprite.position = ball.startingPosition
         ball.sprite = sprite
         
         //  Actual radius doesn't matter since balls don't collide
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -30)
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -60)
         
         //  Add to scene
         self.ballLayer.addChild(sprite)
+    }
+    
+    //  Returns IDs of balls off screen
+    func getOffscreenBalls(_ balls: [Ball]) -> [String] {
+        let offscreen = balls.filter { !self.intersects($0.sprite!) }
+        return offscreen.map { $0.id }
+    }
+    
+    //  Send a ball to the right
+    func swipeBallRight(ball: Ball) {
+        ball.sprite.physicsBody?.velocity = CGVector(dx: 500, dy: 0)
+    }
+    
+    //  Send a ball to the left
+    func swipeBallLeft(ball: Ball) {
+        ball.sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
     }
     
     func startTicking() {

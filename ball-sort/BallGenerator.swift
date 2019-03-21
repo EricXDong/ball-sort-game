@@ -10,19 +10,23 @@ import SpriteKit
 
 class BallGenerator {
     //  Random error added to period
-    let periodError: Int = 250
+    let periodError: Int = 750
     
     //  How many ms until next new ball
     let basePeriod = 1000
     
     //  Higher level means balls spawn more frequently
     let levelMultiplier = 100
+    
     var currentLevel = 0
+    var levelColors: (Color, Color)!
     
     //  Where on the x axis to spawn the ball
     var xCoordRange: (Int, Int)
+    
     let delegate: VCDelegate
     
+    //  Stuff for timing new balls
     var lastBallTimestamp: NSDate?
     var timeUntilNextBall: Int?
     
@@ -36,6 +40,7 @@ class BallGenerator {
             return;
         }
         
+        //  Check if it's time to generate a ball
         let elapsed = -Int(last.timeIntervalSinceNow * 1000)
         if elapsed >= self.timeUntilNextBall! {
             //  Generate a ball and set new time
@@ -57,8 +62,18 @@ class BallGenerator {
     }
     
     func getRandomBall() -> Ball {
+        //  Random position along top of screen
         let position = CGPoint(x: Int.random(in: self.xCoordRange.0 ..< self.xCoordRange.1), y: -20)
-        let ball = Ball(color: Color.allCases.randomElement()!, position: position)
+        
+        //  Randomly pick the color based on current level colors
+        let colorIdx = Int.random(in: 0...1)
+        let color = colorIdx == 0 ? self.levelColors.0 : self.levelColors.1
+        
+        let ball = Ball(color: color, startingPosition: position)
         return ball
+    }
+    
+    func setLevelColors(colors: (Color, Color)) {
+        self.levelColors = colors
     }
 }

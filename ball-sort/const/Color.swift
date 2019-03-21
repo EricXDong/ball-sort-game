@@ -37,4 +37,13 @@ enum Color: Int, CaseIterable {
     static func random() -> Color {
         return Color(rawValue: Int(arc4random_uniform(Color.count)))!
     }
+    
+    static func getTwoRandomColors() -> (Color, Color) {
+        let firstColor = Color.random()
+        var secondColor = Color.random()
+        while secondColor == firstColor {
+            secondColor = Color.random()
+        }
+        return (firstColor, secondColor)
+    }
 }

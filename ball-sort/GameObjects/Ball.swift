@@ -11,17 +11,17 @@ import SpriteKit
 class Ball {
     let id: String
     let color: Color
-    var position: CGPoint
+    var startingPosition: CGPoint
     
-    var sprite: SKSpriteNode?
+    var sprite: SKSpriteNode!
     
     var name: String {
         return self.color.colorName
     }
     
-    init(color: Color, position: CGPoint) {
+    init(color: Color, startingPosition: CGPoint) {
         self.id = UUID().uuidString
         self.color = color
-        self.position = position
+        self.startingPosition = startingPosition
     }
 }
