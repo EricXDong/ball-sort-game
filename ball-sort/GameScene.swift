@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let gameLayer = SKNode()
     let ballLayer = SKNode()
@@ -17,33 +17,33 @@ class GameScene: SKScene {
     var textureCache = [String: SKTexture]()
     var vcDelegate: VCDelegate?
     
-    var lastTick: NSDate?
+    var isTicking: Bool
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
     }
     
     override init(size: CGSize) {
+        self.isTicking = false
+        
         super.init(size: size)
         
         self.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(self.gameLayer)
         
+        //  Add ball layer
         self.gameLayer.addChild(self.ballLayer)
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
     
     override func update(_ currentTime: TimeInterval) {
-        guard let lastTick = self.lastTick else {
+        //  Game can be paused
+        if !self.isTicking {
             return
         }
         
-        let delta = lastTick.timeIntervalSinceNow * -1000.0
-        if delta > 2000 {
-            self.lastTick = NSDate()
-            self.vcDelegate!.didTick()
-        }
+        self.vcDelegate!.didTick()
     }
     
     func addBallToScene(ball: Ball) {
@@ -59,8 +59,7 @@ class GameScene: SKScene {
         sprite.position = ball.startingPosition
         ball.sprite = sprite
         
-        //  Actual radius doesn't matter since balls don't collide
-        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 5)
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 50)
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -60)
         
@@ -69,22 +68,21 @@ class GameScene: SKScene {
     }
     
     //  Returns IDs of balls off screen
-    func getOffscreenBalls(_ balls: [Ball]) -> [String] {
-        let offscreen = balls.filter { !self.intersects($0.sprite!) }
-        return offscreen.map { $0.id }
+    func getOffscreenBalls(_ balls: [Ball]) -> [Ball] {
+        return balls.filter { !self.intersects($0.sprite!) }
     }
     
-    //  Send a ball to the right
-    func swipeBallRight(ball: Ball) {
-        ball.sprite.physicsBody?.velocity = CGVector(dx: 500, dy: 0)
-    }
-    
-    //  Send a ball to the left
-    func swipeBallLeft(ball: Ball) {
-        ball.sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
-    }
+//    //  Send a ball to the right
+//    func swipeBallRight(ball: Ball) {
+//        ball.sprite.physicsBody?.velocity = CGVector(dx: 500, dy: 0)
+//    }
+//
+//    //  Send a ball to the left
+//    func swipeBallLeft(ball: Ball) {
+//        ball.sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+//    }
     
     func startTicking() {
-        self.lastTick = NSDate()
+        self.isTicking = true
     }
 }

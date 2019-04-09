@@ -21,7 +21,9 @@ class GameViewController: UIViewController, VCDelegate {
     var scene: GameScene!
     var engine: GameEngine!
     var ballGen: BallGenerator!
-
+    
+    @IBOutlet var scoreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +46,7 @@ class GameViewController: UIViewController, VCDelegate {
         
         //  Set up the game engine
         self.engine = GameEngine(delegate: self)
+        self.scoreLabel.text = String(self.engine.score)
         
         view.presentScene(self.scene)
     }
@@ -57,6 +60,8 @@ class GameViewController: UIViewController, VCDelegate {
     }
     
     func didTick() {
+        self.scoreLabel.text = String(self.engine.score)
+        
         //  Keep generating balls
         self.ballGen.tick()
         
@@ -65,10 +70,15 @@ class GameViewController: UIViewController, VCDelegate {
         for (_, ball) in self.engine.balls {
             balls.append(ball)
         }
-        let offscreenBalls: [String] = self.scene.getOffscreenBalls(balls)
-        for ballID in offscreenBalls {
-            self.engine.removeBallByKey(key: ballID)
+        let offscreenBalls = self.scene.getOffscreenBalls(balls)
+        for ball in offscreenBalls {
+            self.removeBallFromScene(ball: ball)
         }
+    }
+    
+    func removeBallFromScene(ball: Ball) {
+        self.engine.removeBallByKey(key: ball.id)
+        ball.sprite.removeFromParent()
     }
     
     func newBall(ball: Ball) {
@@ -104,13 +114,24 @@ class GameViewController: UIViewController, VCDelegate {
         guard let swipedBall = self.getSwipedBall(sender) else {
             return
         }
-        self.scene.swipeBallRight(ball: swipedBall)
+        
+        if (swipedBall.color == self.engine.levelColors.1) {
+            //  Correct swipe
+            self.engine.addPoint()
+            
+        }
+        self.removeBallFromScene(ball: swipedBall)
     }
     
     @IBAction func onSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         guard let swipedBall = self.getSwipedBall(sender) else {
             return
         }
-        self.scene.swipeBallLeft(ball: swipedBall)
+        
+        if (swipedBall.color == self.engine.levelColors.0) {
+            //  Correct swipe
+            self.engine.addPoint()
+        }
+        self.removeBallFromScene(ball: swipedBall)
     }
 }

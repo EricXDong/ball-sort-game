@@ -7,6 +7,8 @@
 //
 
 class GameEngine {
+    var score: Int
+    
     var currentLevel: Int
     var levelColors: (Color, Color)
     
@@ -16,6 +18,7 @@ class GameEngine {
     
     init(delegate: VCDelegate) {
         self.delegate = delegate
+        self.score = 0
         self.currentLevel = 1
         self.balls = [:]
         self.levelColors = Color.getTwoRandomColors()
@@ -33,5 +36,8 @@ class GameEngine {
         self.balls.removeValue(forKey: key)
     }
     
-    
+    //  Add 1 point to score
+    func addPoint() {
+        self.score += 1
+    }
 }
