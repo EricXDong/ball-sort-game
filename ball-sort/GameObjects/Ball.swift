@@ -10,7 +10,7 @@ import SpriteKit
 
 class Ball {
     let id: String
-    let color: Color
+    var color: Color
     var startingPosition: CGPoint
     
     var sprite: SKSpriteNode!

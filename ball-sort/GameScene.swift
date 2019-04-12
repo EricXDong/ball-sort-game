@@ -62,10 +62,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 50)
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -60)
+        sprite.physicsBody?.categoryBitMask = 0x1 << 1
+        sprite.physicsBody?.collisionBitMask = 0
         
         //  Add to scene
         self.ballLayer.addChild(sprite)
     }
+    
+    NEED TO ADD FUNC TO CHANGE BALL TEXTURE WHEN COLORS CHANGE
     
     //  Returns IDs of balls off screen
     func getOffscreenBalls(_ balls: [Ball]) -> [Ball] {

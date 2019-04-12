@@ -16,6 +16,16 @@ protocol VCDelegate {
     func setLevelColors(colors: (Color, Color))
 }
 
+let labelColor: [String: UIColor] = [
+    "blue": UIColor.blue,
+    "green": UIColor.green,
+    "orange": UIColor.orange,
+    "pink": UIColor.init(red: 255, green: 20, blue: 147, alpha: 1),
+    "red": UIColor.red,
+    "teal": UIColor.cyan,
+    "yellow": UIColor.yellow
+]
+
 class GameViewController: UIViewController, VCDelegate {
     
     var scene: GameScene!
@@ -23,6 +33,9 @@ class GameViewController: UIViewController, VCDelegate {
     var ballGen: BallGenerator!
     
     @IBOutlet var scoreLabel: UILabel!
+    
+    @IBOutlet var rightLabel: UILabel!
+    @IBOutlet var leftLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +87,10 @@ class GameViewController: UIViewController, VCDelegate {
         for ball in offscreenBalls {
             self.removeBallFromScene(ball: ball)
         }
+        
+        //  Debug shit
+        self.rightLabel.textColor = labelColor[self.engine.levelColors.1.colorName]
+        self.leftLabel.textColor = labelColor[self.engine.levelColors.0.colorName]
     }
     
     func removeBallFromScene(ball: Ball) {
