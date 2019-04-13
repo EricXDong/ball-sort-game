@@ -46,20 +46,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.vcDelegate!.didTick()
     }
     
-    func addBallToScene(ball: Ball) {
+    func _getTextureForColor(color: Color) -> SKTexture {
         //  Load texture from cache or load new and save in cache
-        var texture = self.textureCache[ball.name]
+        var texture = self.textureCache[color.colorName]
         if texture == nil {
-            texture = SKTexture(imageNamed: ball.name)
-            self.textureCache[ball.name] = texture
+            texture = SKTexture(imageNamed: color.colorName)
+            self.textureCache[color.colorName] = texture
         }
-        
+        return texture!
+    }
+    
+    func addBallToScene(ball: Ball) {
         //  Load sprite
-        let sprite = SKSpriteNode(texture: texture)
+        let sprite = SKSpriteNode(texture: self._getTextureForColor(color: ball.color))
         sprite.position = ball.startingPosition
         ball.sprite = sprite
         
-        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 50)
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 60)
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -60)
         sprite.physicsBody?.categoryBitMask = 0x1 << 1
@@ -69,22 +72,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.ballLayer.addChild(sprite)
     }
     
-    NEED TO ADD FUNC TO CHANGE BALL TEXTURE WHEN COLORS CHANGE
-    
     //  Returns IDs of balls off screen
     func getOffscreenBalls(_ balls: [Ball]) -> [Ball] {
         return balls.filter { !self.intersects($0.sprite!) }
     }
     
-//    //  Send a ball to the right
-//    func swipeBallRight(ball: Ball) {
-//        ball.sprite.physicsBody?.velocity = CGVector(dx: 500, dy: 0)
-//    }
-//
-//    //  Send a ball to the left
-//    func swipeBallLeft(ball: Ball) {
-//        ball.sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
-//    }
+    //  Change the ball's texture
+    func setBallColor(ball: Ball, color: Color) {
+        ball.sprite.texture = self._getTextureForColor(color: color)
+    }
     
     func startTicking() {
         self.isTicking = true

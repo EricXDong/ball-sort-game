@@ -14,6 +14,7 @@ protocol VCDelegate {
     func didTick()
     func newBall(ball: Ball)
     func setLevelColors(colors: (Color, Color))
+    func setBallColor(ball: Ball, color: Color)
 }
 
 let labelColor: [String: UIColor] = [
@@ -105,6 +106,11 @@ class GameViewController: UIViewController, VCDelegate {
     
     func setLevelColors(colors: (Color, Color)) {
         self.ballGen.setLevelColors(colors: colors)
+    }
+    
+    func setBallColor(ball: Ball, color: Color) {
+        //  GameScene has to do it since it holds the texture cache
+        self.scene.setBallColor(ball: ball, color: color)
     }
     
     //  Return the first ball that intersects point, or nil if none

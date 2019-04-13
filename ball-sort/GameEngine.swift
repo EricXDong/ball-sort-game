@@ -59,7 +59,7 @@ class GameEngine {
             self.ballsLock.lock()
             for (_, ball) in self.balls {
                 ball.color = Int.random(in: 0 ... 1) == 0 ? self.levelColors.0 : self.levelColors.1
-                print("Changed color to " + ball.color.colorName)
+                self.delegate.setBallColor(ball: ball, color: ball.color)
             }
             self.ballsLock.unlock()
         }
