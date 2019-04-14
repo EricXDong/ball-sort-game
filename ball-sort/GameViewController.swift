@@ -18,24 +18,13 @@ protocol VCDelegate {
     func setBallColor(ball: Ball, color: Color)
 }
 
-let labelColor: [String: UIColor] = [
-    "blue": UIColor.blue,
-    "green": UIColor.green,
-    "orange": UIColor.orange,
-    "pink": UIColor.init(red: 255, green: 20, blue: 147, alpha: 1),
-    "red": UIColor.red,
-    "teal": UIColor.cyan,
-    "yellow": UIColor.yellow
-]
-
-class TupleWrapper {
-    let tuple: (Any, Any)
-    init(tuple: (Any, Any)) {
-        self.tuple = tuple
-    }
+enum UserDataKeys {
+    case HighScore
 }
 
 class GameViewController: UIViewController, VCDelegate {
+    
+    let userData = UserDefaults.standard
     
     var scene: GameScene!
     var engine: GameEngine!
@@ -111,8 +100,8 @@ class GameViewController: UIViewController, VCDelegate {
         }
         
         //  Debug shit
-        self.rightLabel.textColor = labelColor[self.engine.levelColors.1.colorName]
-        self.leftLabel.textColor = labelColor[self.engine.levelColors.0.colorName]
+        self.rightLabel.textColor = SystemColors[self.engine.levelColors.1.colorName]
+        self.leftLabel.textColor = SystemColors[self.engine.levelColors.0.colorName]
     }
     
     func removeBallFromScene(ball: Ball) {

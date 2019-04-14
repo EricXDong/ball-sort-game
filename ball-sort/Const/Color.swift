@@ -8,6 +8,17 @@
 
 import SpriteKit
 
+//  Maps color string to matching system color
+let SystemColors: [String: UIColor] = [
+    "blue": UIColor.blue,
+    "green": UIColor.green,
+    "orange": UIColor.orange,
+    "pink": UIColor.init(red: 1, green: 0.078, blue: 0.576, alpha: 1),
+    "red": UIColor.red,
+    "teal": UIColor.cyan,
+    "yellow": UIColor.yellow
+]
+
 enum Color: Int, CaseIterable {
     case Blue = 0, Green, Orange, Pink, Red, Teal, Yellow
     
