@@ -111,7 +111,7 @@
 		58AA5D7C2232146E00D85468 /* ball-sort */ = {
 			isa = PBXGroup;
 			children = (
-				58AA5DB822334A9A00D85468 /* const */,
+				58AA5DB822334A9A00D85468 /* Const */,
 				58AA5DB5223348CC00D85468 /* GameObjects */,
 				58AA5D7D2232146E00D85468 /* AppDelegate.swift */,
 				58AA5D812232146E00D85468 /* Actions.sks */,
@@ -154,12 +154,12 @@
 			path = GameObjects;
 			sourceTree = "<group>";
 		};
-		58AA5DB822334A9A00D85468 /* const */ = {
+		58AA5DB822334A9A00D85468 /* Const */ = {
 			isa = PBXGroup;
 			children = (
 				58AA5DB922334ADC00D85468 /* Color.swift */,
 			);
-			path = const;
+			path = Const;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

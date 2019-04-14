@@ -38,6 +38,26 @@
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="42K-x1-Z43">
+                                <rect key="frame" x="86.056904400606996" y="393.72534142640359" width="241" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUa-4g-rws">
+                                        <rect key="frame" x="0.0" y="0.0" width="241" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVe-2D-Kni">
+                                        <rect key="frame" x="66" y="68" width="109" height="41"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                        <state key="normal" title="Play Again"/>
+                                        <connections>
+                                            <action selector="onClickPlayAgain:" destination="BV1-FR-VrT" eventType="primaryActionTriggered" id="1yH-eB-jR7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -52,9 +72,12 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="gameOverGroup" destination="42K-x1-Z43" id="qxB-0u-UMu"/>
+                        <outlet property="gameOverLabel" destination="uUa-4g-rws" id="Ept-AZ-dOb"/>
                         <outlet property="leftLabel" destination="YGc-3y-sLA" id="Ehm-4W-LCR"/>
+                        <outlet property="playAgainButton" destination="rVe-2D-Kni" id="gNx-Jh-mNY"/>
                         <outlet property="rightLabel" destination="r0s-ye-MAj" id="xK4-Js-a8V"/>
-                        <outlet property="scoreLabel" destination="yDm-6w-Lyh" id="95c-30-457"/>
+                        <outlet property="scoreLabel" destination="yDm-6w-Lyh" id="042-C9-0dc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

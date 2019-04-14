@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 60)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -60)
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -80)
         sprite.physicsBody?.categoryBitMask = 0x1 << 1
         sprite.physicsBody?.collisionBitMask = 0
         
@@ -73,8 +73,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     //  Returns IDs of balls off screen
-    func getOffscreenBalls(_ balls: [Ball]) -> [Ball] {
-        return balls.filter { !self.intersects($0.sprite!) }
+    func getOffscreenBalls(_ balls: [Ball]) -> ([Ball], Bool) {
+        //  y positions are negative
+        let allOffscreen = balls.filter { !self.intersects($0.sprite!) }
+        let isOffBottomScreen = allOffscreen.contains { $0.sprite.position.y < -self.size.height }
+        return (allOffscreen, isOffBottomScreen)
     }
     
     //  Change the ball's texture
@@ -84,5 +87,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func startTicking() {
         self.isTicking = true
+    }
+    
+    //  Clean up and reset
+    func gameOver() {
+        self.ballLayer.removeAllChildren()
+        self.isTicking = false
     }
 }

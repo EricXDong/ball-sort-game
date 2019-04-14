@@ -27,6 +27,13 @@ let labelColor: [String: UIColor] = [
     "yellow": UIColor.yellow
 ]
 
+class TupleWrapper {
+    let tuple: (Any, Any)
+    init(tuple: (Any, Any)) {
+        self.tuple = tuple
+    }
+}
+
 class GameViewController: UIViewController, VCDelegate {
     
     var scene: GameScene!
@@ -35,11 +42,17 @@ class GameViewController: UIViewController, VCDelegate {
     
     @IBOutlet var scoreLabel: UILabel!
     
+    //  Contains the game over label and buttons
+    @IBOutlet var gameOverGroup: UIStackView!
+    @IBOutlet var gameOverLabel: UILabel!
+    @IBOutlet var playAgainButton: UIButton!
+    
     @IBOutlet var rightLabel: UILabel!
     @IBOutlet var leftLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.gameOverGroup.isHidden = true
         
         //  Set up view
         let view = self.view as! SKView
@@ -84,7 +97,14 @@ class GameViewController: UIViewController, VCDelegate {
         for (_, ball) in self.engine.balls {
             balls.append(ball)
         }
-        let offscreenBalls = self.scene.getOffscreenBalls(balls)
+        let (offscreenBalls, isOffBottomScreen) = self.scene.getOffscreenBalls(balls)
+        
+        //  First check if game over
+        if isOffBottomScreen {
+            self.gameOver()
+            return
+        }
+        
         for ball in offscreenBalls {
             self.removeBallFromScene(ball: ball)
         }
@@ -133,6 +153,16 @@ class GameViewController: UIViewController, VCDelegate {
         return self.getBallAtPoint(point: swipePointInScene)
     }
     
+    func gameOver() {
+        self.scene.gameOver()
+        self.engine.gameOver()
+        self.scoreLabel.text = String(self.engine.score)
+        self.gameOverGroup.isHidden = false
+    }
+    
+    //  User interactions
+    
+    //  Ball swiping
     @IBAction func onSwipeRight(_ sender: UISwipeGestureRecognizer) {
         guard let swipedBall = self.getSwipedBall(sender) else {
             return
@@ -142,10 +172,13 @@ class GameViewController: UIViewController, VCDelegate {
             //  Correct swipe
             self.engine.addPoint()
             
+        } else {
+            self.gameOver()
         }
         self.removeBallFromScene(ball: swipedBall)
     }
     
+    //  Ball swiping
     @IBAction func onSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         guard let swipedBall = self.getSwipedBall(sender) else {
             return
@@ -154,7 +187,16 @@ class GameViewController: UIViewController, VCDelegate {
         if (swipedBall.color == self.engine.levelColors.0) {
             //  Correct swipe
             self.engine.addPoint()
+        } else {
+            self.gameOver()
         }
         self.removeBallFromScene(ball: swipedBall)
+    }
+    
+    //  PLaying again after game over
+    @IBAction func onClickPlayAgain(_ sender: UIButton) {
+        self.gameOverGroup.isHidden = true
+        self.engine.setNewColors()
+        self.scene.isTicking = true
     }
 }

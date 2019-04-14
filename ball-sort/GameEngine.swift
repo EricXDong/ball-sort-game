@@ -14,7 +14,7 @@ class GameEngine {
     var score: Int
     
     var currentLevel: Int
-    var levelColors: (Color, Color)
+    var levelColors: (Color, Color)!
     
     var balls: [String: Ball]
     let ballsLock: NSLock
@@ -27,8 +27,11 @@ class GameEngine {
         self.currentLevel = 1
         self.balls = [:]
         self.ballsLock = NSLock()
+        self.setNewColors()
+    }
+    
+    func setNewColors() {
         self.levelColors = Color.getTwoRandomColors()
-        
         self.delegate.setLevelColors(colors: self.levelColors)
     }
     
@@ -63,5 +66,15 @@ class GameEngine {
             }
             self.ballsLock.unlock()
         }
+    }
+    
+    //  Clean up and reset
+    func gameOver() {
+        self.score = 0
+        self.currentLevel = 1
+        
+        self.ballsLock.lock()
+        self.balls.removeAll()
+        self.ballsLock.unlock()
     }
 }
