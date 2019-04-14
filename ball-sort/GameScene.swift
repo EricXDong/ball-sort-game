@@ -62,9 +62,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.position = ball.startingPosition
         ball.sprite = sprite
         
-        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 60)
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 1)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -80)
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -100)
         sprite.physicsBody?.categoryBitMask = 0x1 << 1
         sprite.physicsBody?.collisionBitMask = 0
         
@@ -78,11 +78,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let allOffscreen = balls.filter { !self.intersects($0.sprite!) }
         let isOffBottomScreen = allOffscreen.contains { $0.sprite.position.y < -self.size.height }
         return (allOffscreen, isOffBottomScreen)
-    }
-    
-    //  Change the ball's texture
-    func setBallColor(ball: Ball, color: Color) {
-        ball.sprite.texture = self._getTextureForColor(color: color)
     }
     
     func startTicking() {

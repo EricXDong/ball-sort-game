@@ -8,9 +8,7 @@
 
 import Foundation
 
-//  Expressed as %
-let chanceOfColorChange = 15
-let pointsPerLevel = 2
+let pointsPerLevel = 10
 
 class GameEngine {
     var score: Int
@@ -54,20 +52,6 @@ class GameEngine {
     //  Add 1 point to score
     func addPoint() {
         self.score += 1
-        
-        //  Check if time to change colors
-        if Int.random(in: 1 ... 100) < chanceOfColorChange {
-            self.levelColors = Color.getTwoRandomColors()
-            self.delegate.setLevelColors(colors: self.levelColors)
-            
-            //  Randomly change colors of balls already on screen
-            self.ballsLock.lock()
-            for (_, ball) in self.balls {
-                ball.color = Int.random(in: 0 ... 1) == 0 ? self.levelColors.0 : self.levelColors.1
-                self.delegate.setBallColor(ball: ball, color: ball.color)
-            }
-            self.ballsLock.unlock()
-        }
         
         //  Check if time to level up
         if self.score % pointsPerLevel == 0 {

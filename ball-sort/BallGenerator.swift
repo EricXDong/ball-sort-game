@@ -10,18 +10,23 @@ import SpriteKit
 
 class BallGenerator {
     //  Random error added to period
-    let periodError: Int = 750
+    let periodError: Int = 1000
     
     //  How many ms until next new ball
     let basePeriod = 1000
+    let minPeriod = 250
     
     //  Higher level means balls spawn more frequently
-    let levelMultiplier = 100
+    let levelMultiplier = 200
     
     var levelColors: (Color, Color)!
     
     //  Where on the x axis to spawn the ball
     var xCoordRange: (Int, Int)
+    
+    //  Where the last ball was spawned, next ball shouldn't be too close
+    var lastSpawnX: Float = 0
+    let minDistanceFromLastSpawn: Float = 100
     
     let delegate: VCDelegate
     
@@ -56,13 +61,22 @@ class BallGenerator {
     
     func getTimeUntilNextBall() -> Int {
         let base = self.basePeriod - (self.delegate.getCurrentLevel() * self.levelMultiplier);
-        let error = Int.random(in: -self.periodError ..< self.periodError)
-        return base + error
+        let error = Int.random(in: -self.periodError ... self.periodError)
+        let spawnTime = base + error
+        return spawnTime > self.minPeriod ? spawnTime : self.minPeriod
+    }
+    
+    func getRandomSpawnPoint() -> CGPoint {
+        return CGPoint(x: Int.random(in: self.xCoordRange.0 ..< self.xCoordRange.1), y: -20)
     }
     
     func getRandomBall() -> Ball {
-        //  Random position along top of screen
-        let position = CGPoint(x: Int.random(in: self.xCoordRange.0 ..< self.xCoordRange.1), y: -20)
+        //  Random position along top of screen that's not too close to the last spawned ball
+        var position = self.getRandomSpawnPoint()
+        while abs(Float(position.x) - self.lastSpawnX) < self.minDistanceFromLastSpawn {
+            position = self.getRandomSpawnPoint()
+        }
+        self.lastSpawnX = Float(position.x)
         
         //  Randomly pick the color based on current level colors
         let colorIdx = Int.random(in: 0...1)

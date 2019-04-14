@@ -15,22 +15,23 @@ protocol VCDelegate {
     func newBall(ball: Ball)
     func getCurrentLevel() -> Int
     func setLevelColors(colors: (Color, Color))
-    func setBallColor(ball: Ball, color: Color)
 }
 
-enum UserDataKeys {
-    case HighScore
+struct UserDataKeys {
+    static let HighScore = "high-score"
 }
 
 class GameViewController: UIViewController, VCDelegate {
     
     let userData = UserDefaults.standard
+    var highScore: Int!
     
     var scene: GameScene!
     var engine: GameEngine!
     var ballGen: BallGenerator!
     
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var highScoreLabel: UILabel!
     
     //  Contains the game over label and buttons
     @IBOutlet var gameOverGroup: UIStackView!
@@ -44,6 +45,13 @@ class GameViewController: UIViewController, VCDelegate {
         super.viewDidLoad()
         self.gameOverGroup.isHidden = true
         
+        //  DON'T LET ME GET INTO PRODUCTION!!!
+        self.userData.removeObject(forKey: UserDataKeys.HighScore)
+        
+        //  High score stuff
+        self.highScore = self.userData.integer(forKey: UserDataKeys.HighScore)
+        self.updateHighScoreLabel()
+        
         //  Set up view
         let view = self.view as! SKView
         view.isMultipleTouchEnabled = false
@@ -56,7 +64,7 @@ class GameViewController: UIViewController, VCDelegate {
         
         //  Set up ball generator
         self.ballGen = BallGenerator(
-            xCoordRange: (50, Int(view.bounds.size.width) - 50),
+            xCoordRange: (100, Int(view.bounds.size.width) - 100),
             delegate: self
         )
         
@@ -118,18 +126,12 @@ class GameViewController: UIViewController, VCDelegate {
         self.ballGen.setLevelColors(colors: colors)
     }
     
-    func setBallColor(ball: Ball, color: Color) {
-        //  GameScene has to do it since it holds the texture cache
-        self.scene.setBallColor(ball: ball, color: color)
-    }
-    
     //  Return the first ball that intersects point, or nil if none
     func getBallAtPoint(point: CGPoint) -> Ball? {
         for (_, ball) in self.engine.balls {
             if ball.sprite.contains(point) {
                 return ball
             }
-            
         }
         return nil
     }
@@ -143,7 +145,18 @@ class GameViewController: UIViewController, VCDelegate {
         return self.getBallAtPoint(point: swipePointInScene)
     }
     
+    func updateHighScoreLabel() {
+        self.highScoreLabel.text = "High score: \(self.highScore as Int)"
+    }
+    
     func gameOver() {
+        //  Update high score if necessary
+        if self.engine.score > self.highScore {
+            self.highScore = self.engine.score
+            self.updateHighScoreLabel()
+            self.userData.set(self.highScore, forKey: UserDataKeys.HighScore)
+        }
+        
         self.scene.gameOver()
         self.engine.gameOver()
         self.scoreLabel.text = String(self.engine.score)
