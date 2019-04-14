@@ -13,6 +13,7 @@ import GameplayKit
 protocol VCDelegate {
     func didTick()
     func newBall(ball: Ball)
+    func getCurrentLevel() -> Int
     func setLevelColors(colors: (Color, Color))
     func setBallColor(ball: Ball, color: Color)
 }
@@ -69,12 +70,12 @@ class GameViewController: UIViewController, VCDelegate {
             xCoordRange: (50, Int(view.bounds.size.width) - 50),
             delegate: self
         )
-        self.ballGen.startGenerating()
         
         //  Set up the game engine
         self.engine = GameEngine(delegate: self)
         self.scoreLabel.text = String(self.engine.score)
         
+        self.ballGen.startGenerating()
         view.presentScene(self.scene)
     }
 
@@ -158,6 +159,11 @@ class GameViewController: UIViewController, VCDelegate {
         self.engine.gameOver()
         self.scoreLabel.text = String(self.engine.score)
         self.gameOverGroup.isHidden = false
+    }
+    
+    //  Getter for the ball gen
+    func getCurrentLevel() -> Int {
+        return self.engine.currentLevel
     }
     
     //  User interactions

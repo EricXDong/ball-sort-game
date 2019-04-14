@@ -18,7 +18,6 @@ class BallGenerator {
     //  Higher level means balls spawn more frequently
     let levelMultiplier = 100
     
-    var currentLevel = 0
     var levelColors: (Color, Color)!
     
     //  Where on the x axis to spawn the ball
@@ -56,7 +55,7 @@ class BallGenerator {
     }
     
     func getTimeUntilNextBall() -> Int {
-        let base = self.basePeriod - (self.currentLevel * self.levelMultiplier);
+        let base = self.basePeriod - (self.delegate.getCurrentLevel() * self.levelMultiplier);
         let error = Int.random(in: -self.periodError ..< self.periodError)
         return base + error
     }
