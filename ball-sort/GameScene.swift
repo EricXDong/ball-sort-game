@@ -23,10 +23,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fatalError("NSCoder not supported")
     }
     
-    override init(size: CGSize) {
+    init(fileNamed: String) {
         self.isTicking = false
         
-        super.init(size: size)
+        super.init(fileNamed: fileNamed)!
+//        self.sce = SKScene(fileNamed: "GameScene")
         
         self.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(self.gameLayer)

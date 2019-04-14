@@ -21,6 +21,7 @@
 		58AA5DB2223216ED00D85468 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB1223216ED00D85468 /* GameEngine.swift */; };
 		58AA5DB7223348DF00D85468 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB6223348DF00D85468 /* Ball.swift */; };
 		58AA5DBA22334ADC00D85468 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB922334ADC00D85468 /* Color.swift */; };
+		85C079282263ECD300989646 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85C079272263ECD300989646 /* GameScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		58AA5DB1223216ED00D85468 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		58AA5DB6223348DF00D85468 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		58AA5DB922334ADC00D85468 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		85C079272263ECD300989646 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		58AA5D7C2232146E00D85468 /* ball-sort */ = {
 			isa = PBXGroup;
 			children = (
+				85C079262263ECA600989646 /* Scenes */,
 				58AA5DB822334A9A00D85468 /* Const */,
 				58AA5DB5223348CC00D85468 /* GameObjects */,
 				58AA5D7D2232146E00D85468 /* AppDelegate.swift */,
@@ -160,6 +163,14 @@
 				58AA5DB922334ADC00D85468 /* Color.swift */,
 			);
 			path = Const;
+			sourceTree = "<group>";
+		};
+		85C079262263ECA600989646 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				85C079272263ECD300989646 /* GameScene.sks */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +281,7 @@
 				58AA5D892232146E00D85468 /* Main.storyboard in Resources */,
 				58AA5D8B2232147100D85468 /* Assets.xcassets in Resources */,
 				58AA5D8E2232147100D85468 /* LaunchScreen.storyboard in Resources */,
+				85C079282263ECD300989646 /* GameScene.sks in Resources */,
 				58AA5D822232146E00D85468 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
