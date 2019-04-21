@@ -57,7 +57,7 @@ class GameViewController: UIViewController, VCDelegate {
         view.isMultipleTouchEnabled = false
         
         //  Set up scene in view
-        self.scene = GameScene(size: view.bounds.size)
+        self.scene = GameScene(fileNamed: "GameScene")
         self.scene.scaleMode = .aspectFill
         self.scene.vcDelegate = self
         self.scene.startTicking()

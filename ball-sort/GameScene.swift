@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     
     let gameLayer = SKNode()
     let ballLayer = SKNode()
@@ -17,26 +17,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var textureCache = [String: SKTexture]()
     var vcDelegate: VCDelegate?
     
-    var isTicking: Bool
+    var isTicking: Bool = false
     
-    required init(coder aDecoder: NSCoder) {
-        fatalError("NSCoder not supported")
-    }
-    
-    init(fileNamed: String) {
-        self.isTicking = false
-        
-        super.init(fileNamed: fileNamed)!
-//        self.sce = SKScene(fileNamed: "GameScene")
-        
-        self.anchorPoint = CGPoint(x: 0, y: 1)
-        self.addChild(self.gameLayer)
-        
-        //  Add ball layer
-        self.gameLayer.addChild(self.ballLayer)
-        
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-    }
+//    required init(coder aDecoder: NSCoder) {
+//        fatalError("NSCoder not supported")
+//    }
+//
+//    init(fileNamed: String) {
+//        self.isTicking = false
+//
+//        super.init(size)
+////        self.sce = SKScene(fileNamed: "GameScene")
+//
+//        self.anchorPoint = CGPoint(x: 0, y: 1)
+//        self.addChild(self.gameLayer)
+//
+//        //  Add ball layer
+//        self.gameLayer.addChild(self.ballLayer)
+//
+//        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+//    }
     
     override func update(_ currentTime: TimeInterval) {
         //  Game can be paused

@@ -16,30 +16,11 @@
 		58AA5D892232146E00D85468 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58AA5D872232146E00D85468 /* Main.storyboard */; };
 		58AA5D8B2232147100D85468 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58AA5D8A2232147100D85468 /* Assets.xcassets */; };
 		58AA5D8E2232147100D85468 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58AA5D8C2232147100D85468 /* LaunchScreen.storyboard */; };
-		58AA5D992232147200D85468 /* ball_sortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5D982232147200D85468 /* ball_sortTests.swift */; };
-		58AA5DA42232147200D85468 /* ball_sortUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DA32232147200D85468 /* ball_sortUITests.swift */; };
 		58AA5DB2223216ED00D85468 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB1223216ED00D85468 /* GameEngine.swift */; };
 		58AA5DB7223348DF00D85468 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB6223348DF00D85468 /* Ball.swift */; };
 		58AA5DBA22334ADC00D85468 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB922334ADC00D85468 /* Color.swift */; };
 		85C079282263ECD300989646 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85C079272263ECD300989646 /* GameScene.sks */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		58AA5D952232147200D85468 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 58AA5D722232146E00D85468 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 58AA5D792232146E00D85468;
-			remoteInfo = "ball-sort";
-		};
-		58AA5DA02232147200D85468 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 58AA5D722232146E00D85468 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 58AA5D792232146E00D85468;
-			remoteInfo = "ball-sort";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5836D33222347512005D1CC3 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
@@ -53,12 +34,6 @@
 		58AA5D8A2232147100D85468 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58AA5D8D2232147100D85468 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58AA5D8F2232147100D85468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58AA5D942232147200D85468 /* ball-sortTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ball-sortTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		58AA5D982232147200D85468 /* ball_sortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ball_sortTests.swift; sourceTree = "<group>"; };
-		58AA5D9A2232147200D85468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58AA5D9F2232147200D85468 /* ball-sortUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ball-sortUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		58AA5DA32232147200D85468 /* ball_sortUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ball_sortUITests.swift; sourceTree = "<group>"; };
-		58AA5DA52232147200D85468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58AA5DB1223216ED00D85468 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		58AA5DB6223348DF00D85468 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		58AA5DB922334ADC00D85468 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -73,20 +48,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		58AA5D912232147200D85468 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		58AA5D9C2232147200D85468 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -94,8 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				58AA5D7C2232146E00D85468 /* ball-sort */,
-				58AA5D972232147200D85468 /* ball-sortTests */,
-				58AA5DA22232147200D85468 /* ball-sortUITests */,
 				58AA5D7B2232146E00D85468 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,8 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				58AA5D7A2232146E00D85468 /* ball-sort.app */,
-				58AA5D942232147200D85468 /* ball-sortTests.xctest */,
-				58AA5D9F2232147200D85468 /* ball-sortUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,24 +86,6 @@
 				5836D33422348C6D005D1CC3 /* BallGenerator.swift */,
 			);
 			path = "ball-sort";
-			sourceTree = "<group>";
-		};
-		58AA5D972232147200D85468 /* ball-sortTests */ = {
-			isa = PBXGroup;
-			children = (
-				58AA5D982232147200D85468 /* ball_sortTests.swift */,
-				58AA5D9A2232147200D85468 /* Info.plist */,
-			);
-			path = "ball-sortTests";
-			sourceTree = "<group>";
-		};
-		58AA5DA22232147200D85468 /* ball-sortUITests */ = {
-			isa = PBXGroup;
-			children = (
-				58AA5DA32232147200D85468 /* ball_sortUITests.swift */,
-				58AA5DA52232147200D85468 /* Info.plist */,
-			);
-			path = "ball-sortUITests";
 			sourceTree = "<group>";
 		};
 		58AA5DB5223348CC00D85468 /* GameObjects */ = {
@@ -193,42 +132,6 @@
 			productReference = 58AA5D7A2232146E00D85468 /* ball-sort.app */;
 			productType = "com.apple.product-type.application";
 		};
-		58AA5D932232147200D85468 /* ball-sortTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 58AA5DAB2232147200D85468 /* Build configuration list for PBXNativeTarget "ball-sortTests" */;
-			buildPhases = (
-				58AA5D902232147200D85468 /* Sources */,
-				58AA5D912232147200D85468 /* Frameworks */,
-				58AA5D922232147200D85468 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				58AA5D962232147200D85468 /* PBXTargetDependency */,
-			);
-			name = "ball-sortTests";
-			productName = "ball-sortTests";
-			productReference = 58AA5D942232147200D85468 /* ball-sortTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		58AA5D9E2232147200D85468 /* ball-sortUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 58AA5DAE2232147200D85468 /* Build configuration list for PBXNativeTarget "ball-sortUITests" */;
-			buildPhases = (
-				58AA5D9B2232147200D85468 /* Sources */,
-				58AA5D9C2232147200D85468 /* Frameworks */,
-				58AA5D9D2232147200D85468 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				58AA5DA12232147200D85468 /* PBXTargetDependency */,
-			);
-			name = "ball-sortUITests";
-			productName = "ball-sortUITests";
-			productReference = 58AA5D9F2232147200D85468 /* ball-sortUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,14 +144,6 @@
 				TargetAttributes = {
 					58AA5D792232146E00D85468 = {
 						CreatedOnToolsVersion = 10.1;
-					};
-					58AA5D932232147200D85468 = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 58AA5D792232146E00D85468;
-					};
-					58AA5D9E2232147200D85468 = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 58AA5D792232146E00D85468;
 					};
 				};
 			};
@@ -266,8 +161,6 @@
 			projectRoot = "";
 			targets = (
 				58AA5D792232146E00D85468 /* ball-sort */,
-				58AA5D932232147200D85468 /* ball-sortTests */,
-				58AA5D9E2232147200D85468 /* ball-sortUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -283,20 +176,6 @@
 				58AA5D8E2232147100D85468 /* LaunchScreen.storyboard in Resources */,
 				85C079282263ECD300989646 /* GameScene.sks in Resources */,
 				58AA5D822232146E00D85468 /* Actions.sks in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		58AA5D922232147200D85468 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		58AA5D9D2232147200D85468 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,36 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		58AA5D902232147200D85468 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				58AA5D992232147200D85468 /* ball_sortTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		58AA5D9B2232147200D85468 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				58AA5DA42232147200D85468 /* ball_sortUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		58AA5D962232147200D85468 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 58AA5D792232146E00D85468 /* ball-sort */;
-			targetProxy = 58AA5D952232147200D85468 /* PBXContainerItemProxy */;
-		};
-		58AA5DA12232147200D85468 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 58AA5D792232146E00D85468 /* ball-sort */;
-			targetProxy = 58AA5DA02232147200D85468 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		58AA5D872232146E00D85468 /* Main.storyboard */ = {
@@ -497,7 +347,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -515,90 +365,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		58AA5DAC2232147200D85468 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XMMKTMN48U;
-				INFOPLIST_FILE = "ball-sortTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sortTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ball-sort.app/ball-sort";
-			};
-			name = Debug;
-		};
-		58AA5DAD2232147200D85468 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XMMKTMN48U;
-				INFOPLIST_FILE = "ball-sortTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sortTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ball-sort.app/ball-sort";
-			};
-			name = Release;
-		};
-		58AA5DAF2232147200D85468 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XMMKTMN48U;
-				INFOPLIST_FILE = "ball-sortUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sortUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "ball-sort";
-			};
-			name = Debug;
-		};
-		58AA5DB02232147200D85468 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XMMKTMN48U;
-				INFOPLIST_FILE = "ball-sortUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "teaclub.ball-sortUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "ball-sort";
 			};
 			name = Release;
 		};
@@ -619,24 +387,6 @@
 			buildConfigurations = (
 				58AA5DA92232147200D85468 /* Debug */,
 				58AA5DAA2232147200D85468 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		58AA5DAB2232147200D85468 /* Build configuration list for PBXNativeTarget "ball-sortTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				58AA5DAC2232147200D85468 /* Debug */,
-				58AA5DAD2232147200D85468 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		58AA5DAE2232147200D85468 /* Build configuration list for PBXNativeTarget "ball-sortUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				58AA5DAF2232147200D85468 /* Debug */,
-				58AA5DB02232147200D85468 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
