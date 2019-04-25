@@ -14,6 +14,9 @@ class GameScene: SKScene {
     let gameLayer = SKNode()
     let ballLayer = SKNode()
     
+    var leftWall: SKSpriteNode!
+    var rightWall: SKSpriteNode!
+    
     var textureCache = [String: SKTexture]()
     var vcDelegate: VCDelegate?
     
@@ -37,6 +40,24 @@ class GameScene: SKScene {
 //
 //        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 //    }
+    
+    //  Avoid weird inherited constructur funkiness
+    func initalize(view: UIView) {
+        self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        self.addChild(self.gameLayer)
+        self.gameLayer.addChild(self.ballLayer)
+        
+        self.leftWall = self.scene?.childNode(withName: "LeftWall") as! SKSpriteNode
+        self.leftWall.position = CGPoint(x: self.leftWall.size.width, y: -self.size.height / 2)
+        self.leftWall.size.height = self.size.height
+        
+        self.rightWall = self.scene?.childNode(withName: "RightWall") as! SKSpriteNode
+        self.rightWall.position = CGPoint(x: self.size.width - self.rightWall.size.width, y: -self.size.height / 2)
+        self.rightWall.size.height = self.size.height
+        
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+    }
     
     override func update(_ currentTime: TimeInterval) {
         //  Game can be paused
@@ -83,6 +104,11 @@ class GameScene: SKScene {
     
     func startTicking() {
         self.isTicking = true
+        
+//        let scene: SKScene = SKScene(fileNamed: "Box")!
+//        let box = scene.childNode(withName: "box")
+//        box?.position = CGPoint(x: 100, y: -100)
+//        box?.move(toParent: self)
     }
     
     //  Clean up and reset

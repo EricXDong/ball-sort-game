@@ -58,6 +58,7 @@ class GameViewController: UIViewController, VCDelegate {
         
         //  Set up scene in view
         self.scene = GameScene(fileNamed: "GameScene")
+        self.scene.initalize(view: self.view!)
         self.scene.scaleMode = .aspectFill
         self.scene.vcDelegate = self
         self.scene.startTicking()
