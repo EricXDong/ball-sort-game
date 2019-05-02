@@ -44,17 +44,15 @@ class GameScene: SKScene {
     //  Avoid weird inherited constructur funkiness
     func initalize(view: UIView) {
         self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.anchorPoint = CGPoint(x: 0, y: 1)
         
         self.addChild(self.gameLayer)
         self.gameLayer.addChild(self.ballLayer)
         
-        self.leftWall = self.scene?.childNode(withName: "LeftWall") as! SKSpriteNode
+        self.leftWall = getWall(name: "LeftWall")
         self.leftWall.position = CGPoint(x: self.leftWall.size.width, y: -self.size.height / 2)
-        self.leftWall.size.height = self.size.height
-        
-        self.rightWall = self.scene?.childNode(withName: "RightWall") as! SKSpriteNode
+        self.rightWall = getWall(name: "RightWall")
         self.rightWall.position = CGPoint(x: self.size.width - self.rightWall.size.width, y: -self.size.height / 2)
-        self.rightWall.size.height = self.size.height
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
@@ -68,8 +66,16 @@ class GameScene: SKScene {
         self.vcDelegate!.didTick()
     }
     
+    //  Get wall with name and scale to screen size
+    func getWall(name: String) -> SKSpriteNode {
+        let wall = self.scene?.childNode(withName: name) as! SKSpriteNode
+        let scaleFactor = self.size.height / wall.size.height
+        wall.yScale = CGFloat(scaleFactor)
+        return wall
+    }
+    
+    //  Load texture from cache or load new and save in cache
     func _getTextureForColor(color: Color) -> SKTexture {
-        //  Load texture from cache or load new and save in cache
         var texture = self.textureCache[color.colorName]
         if texture == nil {
             texture = SKTexture(imageNamed: color.colorName)
@@ -78,12 +84,14 @@ class GameScene: SKScene {
         return texture!
     }
     
+    //  New ball
     func addBallToScene(ball: Ball) {
         //  Load sprite
         let sprite = SKSpriteNode(texture: self._getTextureForColor(color: ball.color))
         sprite.position = ball.startingPosition
         ball.sprite = sprite
         
+        //  Physics shit
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 1)
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -100)
@@ -92,6 +100,17 @@ class GameScene: SKScene {
         
         //  Add to scene
         self.ballLayer.addChild(sprite)
+        
+        //  Particle effects
+        guard let particles = SKEmitterNode(fileNamed: "BallEffect") else {
+            return
+        }
+        particles.particleColor = SystemColors[ball.color.colorName]!
+        particles.targetNode = self
+        sprite.addChild(particles)
+
+        //  If particles loaded, don't need ball texture
+        sprite.texture = nil
     }
     
     //  Returns IDs of balls off screen
@@ -102,13 +121,23 @@ class GameScene: SKScene {
         return (allOffscreen, isOffBottomScreen)
     }
     
+    //  Set colors of walls
+    func setLevelColors(colors: (Color, Color)) {
+        let leftColor = SystemColors[colors.0.colorName]!
+        let rightColor = SystemColors[colors.1.colorName]!
+        
+        self.leftWall.color = leftColor
+        for wall in self.leftWall.children {
+            (wall as! SKSpriteNode).color = leftColor
+        }
+        self.rightWall.color = SystemColors[colors.1.colorName]!
+        for wall in self.rightWall.children {
+            (wall as! SKSpriteNode).color = rightColor
+        }
+    }
+    
     func startTicking() {
         self.isTicking = true
-        
-//        let scene: SKScene = SKScene(fileNamed: "Box")!
-//        let box = scene.childNode(withName: "box")
-//        box?.position = CGPoint(x: 100, y: -100)
-//        box?.move(toParent: self)
     }
     
     //  Clean up and reset

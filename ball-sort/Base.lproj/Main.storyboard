@@ -18,20 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Right" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0s-ye-MAj">
-                                <rect key="frame" x="357" y="434.03373849075206" width="56.999999999999801" height="30.000000000000028"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGc-3y-sLA">
-                                <rect key="frame" x="0.0" y="434" width="43" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="42K-x1-Z43">
                                 <rect key="frame" x="86" y="393.72534142640359" width="241" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,17 +39,17 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eZJ-bP-fIv">
-                                <rect key="frame" x="294" y="44" width="110" height="66"/>
+                                <rect key="frame" x="295.5" y="44" width="78.5" height="49.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDm-6w-Lyh">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="49"/>
-                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78.5" height="35"/>
+                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOQ-ys-dK2">
-                                        <rect key="frame" x="0.0" y="49" width="110" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="0.0" y="35" width="78.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -74,7 +60,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eZJ-bP-fIv" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="OTa-e4-fQO"/>
-                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="eZJ-bP-fIv" secondAttribute="trailing" constant="10" id="jUp-ji-29h"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="eZJ-bP-fIv" secondAttribute="trailing" constant="40" id="jUp-ji-29h"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <connections>
@@ -86,9 +72,7 @@
                         <outlet property="gameOverGroup" destination="42K-x1-Z43" id="qxB-0u-UMu"/>
                         <outlet property="gameOverLabel" destination="uUa-4g-rws" id="Ept-AZ-dOb"/>
                         <outlet property="highScoreLabel" destination="hOQ-ys-dK2" id="w1X-JH-EHx"/>
-                        <outlet property="leftLabel" destination="YGc-3y-sLA" id="Ehm-4W-LCR"/>
                         <outlet property="playAgainButton" destination="rVe-2D-Kni" id="gNx-Jh-mNY"/>
-                        <outlet property="rightLabel" destination="r0s-ye-MAj" id="xK4-Js-a8V"/>
                         <outlet property="scoreLabel" destination="yDm-6w-Lyh" id="042-C9-0dc"/>
                     </connections>
                 </viewController>

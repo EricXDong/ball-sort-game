@@ -23,6 +23,8 @@ struct UserDataKeys {
 
 class GameViewController: UIViewController, VCDelegate {
     
+    let showSwipePoint = true
+    
     let userData = UserDefaults.standard
     var highScore: Int!
     
@@ -38,8 +40,7 @@ class GameViewController: UIViewController, VCDelegate {
     @IBOutlet var gameOverLabel: UILabel!
     @IBOutlet var playAgainButton: UIButton!
     
-    @IBOutlet var rightLabel: UILabel!
-    @IBOutlet var leftLabel: UILabel!
+    //  GAME INIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +86,8 @@ class GameViewController: UIViewController, VCDelegate {
         return true
     }
     
+    //  DELEGATE METHODS
+    
     func didTick() {
         self.scoreLabel.text = String(self.engine.score)
         
@@ -107,15 +110,6 @@ class GameViewController: UIViewController, VCDelegate {
         for ball in offscreenBalls {
             self.removeBallFromScene(ball: ball)
         }
-        
-        //  Debug shit
-        self.rightLabel.textColor = SystemColors[self.engine.levelColors.1.colorName]
-        self.leftLabel.textColor = SystemColors[self.engine.levelColors.0.colorName]
-    }
-    
-    func removeBallFromScene(ball: Ball) {
-        self.engine.removeBallByKey(key: ball.id)
-        ball.sprite.removeFromParent()
     }
     
     func newBall(ball: Ball) {
@@ -123,14 +117,27 @@ class GameViewController: UIViewController, VCDelegate {
         self.scene.addBallToScene(ball: ball)
     }
     
+    //  Getter for the ball gen
+    func getCurrentLevel() -> Int {
+        return self.engine.currentLevel
+    }
+    
     func setLevelColors(colors: (Color, Color)) {
         self.ballGen.setLevelColors(colors: colors)
+        self.scene.setLevelColors(colors: colors)
+    }
+    
+    //  HANDLING BALLS
+    
+    func removeBallFromScene(ball: Ball) {
+        self.engine.removeBallByKey(key: ball.id)
+        ball.sprite.removeFromParent()
     }
     
     //  Return the first ball that intersects point, or nil if none
     func getBallAtPoint(point: CGPoint) -> Ball? {
         for (_, ball) in self.engine.balls {
-            if ball.sprite.contains(point) {
+            if ball.sprite.frame.contains(point) {
                 return ball
             }
         }
@@ -139,15 +146,40 @@ class GameViewController: UIViewController, VCDelegate {
     
     //  Get the ball that was swiped, or nil if none
     func getSwipedBall(_ sender: UISwipeGestureRecognizer) -> Ball? {
-        let swipePoint = sender.location(in: sender.view)
-        //  Convert point based on scene's coordinate system
-        let swipePointInScene = self.scene.convertPoint(toView: swipePoint)
+        //  Get point and convert based on scene's anchor point
+        let swipePoint = sender.location(in: self.view)
+        let swipePointInScene = self.scene.convertPoint(fromView: swipePoint)
+        
+        if (self.showSwipePoint) {
+            self._addPointParticle(at: swipePointInScene)
+        }
+        
+        let ballsTouched = self.scene.nodes(at: swipePointInScene)
+        if ballsTouched.count == 0 {
+            return nil
+        }
         
         return self.getBallAtPoint(point: swipePointInScene)
     }
     
+    func _addPointParticle(at: CGPoint) {
+        let pointEffect = SKEmitterNode(fileNamed: "SwipePoint")!
+        pointEffect.position = at
+        pointEffect.targetNode = self.scene
+        
+        //  Remove after 1 sec
+        pointEffect.run(SKAction.sequence([
+            SKAction.wait(forDuration: 1.0),
+            SKAction.removeFromParent()
+        ]))
+        
+        self.scene.addChild(pointEffect)
+    }
+    
+    //  ENDGAME STUFF
+    
     func updateHighScoreLabel() {
-        self.highScoreLabel.text = "High score: \(self.highScore as Int)"
+        self.highScoreLabel.text = String(self.highScore)
     }
     
     func gameOver() {
@@ -164,12 +196,7 @@ class GameViewController: UIViewController, VCDelegate {
         self.gameOverGroup.isHidden = false
     }
     
-    //  Getter for the ball gen
-    func getCurrentLevel() -> Int {
-        return self.engine.currentLevel
-    }
-    
-    //  User interactions
+    //  USER INTERACTIONS
     
     //  Ball swiping
     @IBAction func onSwipeRight(_ sender: UISwipeGestureRecognizer) {

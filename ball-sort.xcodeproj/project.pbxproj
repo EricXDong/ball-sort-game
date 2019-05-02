@@ -19,7 +19,9 @@
 		58AA5DB2223216ED00D85468 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB1223216ED00D85468 /* GameEngine.swift */; };
 		58AA5DB7223348DF00D85468 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB6223348DF00D85468 /* Ball.swift */; };
 		58AA5DBA22334ADC00D85468 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB922334ADC00D85468 /* Color.swift */; };
-		8585BAB0226EEAD200F7976A /* Box.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8585BAAF226EEAD200F7976A /* Box.sks */; };
+		8555D722227505C700A845A4 /* BallEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8555D720227505C700A845A4 /* BallEffect.sks */; };
+		8555D723227505C700A845A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8555D721227505C700A845A4 /* Assets.xcassets */; };
+		8555D72522750BA200A845A4 /* SwipePoint.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8555D72422750BA200A845A4 /* SwipePoint.sks */; };
 		85C079282263ECD300989646 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85C079272263ECD300989646 /* GameScene.sks */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +40,9 @@
 		58AA5DB1223216ED00D85468 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		58AA5DB6223348DF00D85468 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		58AA5DB922334ADC00D85468 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		8585BAAF226EEAD200F7976A /* Box.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Box.sks; sourceTree = "<group>"; };
+		8555D720227505C700A845A4 /* BallEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallEffect.sks; sourceTree = "<group>"; };
+		8555D721227505C700A845A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8555D72422750BA200A845A4 /* SwipePoint.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SwipePoint.sks; sourceTree = "<group>"; };
 		85C079272263ECD300989646 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +76,7 @@
 		58AA5D7C2232146E00D85468 /* ball-sort */ = {
 			isa = PBXGroup;
 			children = (
+				8555D71F227504F800A845A4 /* Effects */,
 				85C079262263ECA600989646 /* Scenes */,
 				58AA5DB822334A9A00D85468 /* Const */,
 				58AA5DB5223348CC00D85468 /* GameObjects */,
@@ -106,11 +111,20 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
+		8555D71F227504F800A845A4 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				8555D720227505C700A845A4 /* BallEffect.sks */,
+				8555D721227505C700A845A4 /* Assets.xcassets */,
+				8555D72422750BA200A845A4 /* SwipePoint.sks */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
 		85C079262263ECA600989646 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				85C079272263ECD300989646 /* GameScene.sks */,
-				8585BAAF226EEAD200F7976A /* Box.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -177,9 +191,11 @@
 				58AA5D892232146E00D85468 /* Main.storyboard in Resources */,
 				58AA5D8B2232147100D85468 /* Assets.xcassets in Resources */,
 				58AA5D8E2232147100D85468 /* LaunchScreen.storyboard in Resources */,
-				8585BAB0226EEAD200F7976A /* Box.sks in Resources */,
+				8555D722227505C700A845A4 /* BallEffect.sks in Resources */,
 				85C079282263ECD300989646 /* GameScene.sks in Resources */,
+				8555D723227505C700A845A4 /* Assets.xcassets in Resources */,
 				58AA5D822232146E00D85468 /* Actions.sks in Resources */,
+				8555D72522750BA200A845A4 /* SwipePoint.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
