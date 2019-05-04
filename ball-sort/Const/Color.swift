@@ -10,10 +10,10 @@ import SpriteKit
 
 //  Maps color string to matching system color
 let SystemColors: [String: UIColor] = [
-    "blue": UIColor.blue,
+    "blue": UIColor(red: 0, green: 0.294, blue: 1.0, alpha: 1.0),
     "green": UIColor.green,
     "orange": UIColor.orange,
-    "pink": UIColor.init(red: 1, green: 0.078, blue: 0.576, alpha: 1),
+    "pink": UIColor.init(red: 1, green: 0.078, blue: 0.576, alpha: 1.0),
     "red": UIColor.red,
     "teal": UIColor.cyan,
     "yellow": UIColor.yellow

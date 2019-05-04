@@ -17,13 +17,12 @@ protocol VCDelegate {
     func setLevelColors(colors: (Color, Color))
 }
 
+//  For storing high score on device
 struct UserDataKeys {
     static let HighScore = "high-score"
 }
 
 class GameViewController: UIViewController, VCDelegate {
-    
-    let showSwipePoint = true
     
     let userData = UserDefaults.standard
     var highScore: Int!
@@ -150,30 +149,68 @@ class GameViewController: UIViewController, VCDelegate {
         let swipePoint = sender.location(in: self.view)
         let swipePointInScene = self.scene.convertPoint(fromView: swipePoint)
         
-        if (self.showSwipePoint) {
-            self._addPointParticle(at: swipePointInScene)
-        }
-        
-        let ballsTouched = self.scene.nodes(at: swipePointInScene)
-        if ballsTouched.count == 0 {
-            return nil
-        }
-        
         return self.getBallAtPoint(point: swipePointInScene)
     }
     
-    func _addPointParticle(at: CGPoint) {
-        let pointEffect = SKEmitterNode(fileNamed: "SwipePoint")!
-        pointEffect.position = at
-        pointEffect.targetNode = self.scene
+    func spawnSwipeEffects(ball: Ball, toLeft: Bool) {
+        let color = SystemColors[ball.color.colorName]!
+        let position = ball.sprite.position
+        let fwooshSpeed = 2000
         
-        //  Remove after 1 sec
-        pointEffect.run(SKAction.sequence([
-            SKAction.wait(forDuration: 1.0),
+        //  Poof effect
+        let poof = SKEmitterNode(fileNamed: "Poof")!
+        poof.particleColor = color
+        poof.position = position
+        poof.targetNode = self.scene
+        self.scene.addChild(poof)
+        
+        //  Remove after 0.2 sec
+        poof.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.2),
             SKAction.removeFromParent()
         ]))
         
-        self.scene.addChild(pointEffect)
+        //  Fwoosh effect
+        let spawnFwoosh = {() in
+            //  Use an empty node to anchor the fwoosh to, then send it flying
+            let empty = SKNode()
+            empty.position = position
+            empty.physicsBody = SKPhysicsBody(circleOfRadius: 1)
+            empty.physicsBody?.linearDamping = 0
+            empty.physicsBody?.velocity = CGVector(dx: toLeft ? -fwooshSpeed : fwooshSpeed, dy: 0)
+            
+            let fwoosh = SKEmitterNode(fileNamed: "Fwoosh")!
+            fwoosh.particleColor = color
+            fwoosh.targetNode = self.scene
+            empty.addChild(fwoosh)
+            
+            self.scene.addChild(empty)
+            
+            //  Remove node and fwoosh together
+            empty.run(SKAction.sequence([
+                SKAction.wait(forDuration: 1.0),
+                SKAction.removeFromParent()
+            ]))
+        }
+        
+        //  Bang effect
+        let spawnBang = {() in
+            let bang = SKEmitterNode(fileNamed: "Bang")!
+            bang.particleColor = color
+            bang.position = CGPoint(x: toLeft ? 0 : self.scene.size.width, y: position.y)
+            bang.targetNode = self.scene
+            self.scene.addChild(bang)
+        }
+        
+        //  Calculate when to spawn the bang based on position and velocity
+        let distance = toLeft ? position.x : self.scene.size.width - position.x
+        let timeToSpawnBang = Double(distance) / Double(fwooshSpeed)
+        
+        self.scene.run(SKAction.sequence([
+            SKAction.run { spawnFwoosh() },
+            SKAction.wait(forDuration: timeToSpawnBang),
+            SKAction.run { spawnBang() }
+        ]))
     }
     
     //  ENDGAME STUFF
@@ -204,6 +241,8 @@ class GameViewController: UIViewController, VCDelegate {
             return
         }
         
+        self.spawnSwipeEffects(ball: swipedBall, toLeft: false)
+        
         if (swipedBall.color == self.engine.levelColors.1) {
             //  Correct swipe
             self.engine.addPoint()
@@ -219,6 +258,8 @@ class GameViewController: UIViewController, VCDelegate {
         guard let swipedBall = self.getSwipedBall(sender) else {
             return
         }
+        
+        self.spawnSwipeEffects(ball: swipedBall, toLeft: true)
         
         if (swipedBall.color == self.engine.levelColors.0) {
             //  Correct swipe

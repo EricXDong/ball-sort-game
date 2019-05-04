@@ -21,8 +21,10 @@
 		58AA5DBA22334ADC00D85468 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5DB922334ADC00D85468 /* Color.swift */; };
 		8555D722227505C700A845A4 /* BallEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8555D720227505C700A845A4 /* BallEffect.sks */; };
 		8555D723227505C700A845A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8555D721227505C700A845A4 /* Assets.xcassets */; };
-		8555D72522750BA200A845A4 /* SwipePoint.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8555D72422750BA200A845A4 /* SwipePoint.sks */; };
 		85C079282263ECD300989646 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85C079272263ECD300989646 /* GameScene.sks */; };
+		85EEDB09227E3AD70049B59C /* Poof.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB08227E3AD70049B59C /* Poof.sks */; };
+		85EEDB0F227E4AD00049B59C /* Fwoosh.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB0E227E4AD00049B59C /* Fwoosh.sks */; };
+		85EEDB11227E4C9A0049B59C /* Bang.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB10227E4C9A0049B59C /* Bang.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +44,10 @@
 		58AA5DB922334ADC00D85468 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8555D720227505C700A845A4 /* BallEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallEffect.sks; sourceTree = "<group>"; };
 		8555D721227505C700A845A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8555D72422750BA200A845A4 /* SwipePoint.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SwipePoint.sks; sourceTree = "<group>"; };
 		85C079272263ECD300989646 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		85EEDB08227E3AD70049B59C /* Poof.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poof.sks; sourceTree = "<group>"; };
+		85EEDB0E227E4AD00049B59C /* Fwoosh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fwoosh.sks; sourceTree = "<group>"; };
+		85EEDB10227E4C9A0049B59C /* Bang.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bang.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +120,9 @@
 			children = (
 				8555D720227505C700A845A4 /* BallEffect.sks */,
 				8555D721227505C700A845A4 /* Assets.xcassets */,
-				8555D72422750BA200A845A4 /* SwipePoint.sks */,
+				85EEDB08227E3AD70049B59C /* Poof.sks */,
+				85EEDB0E227E4AD00049B59C /* Fwoosh.sks */,
+				85EEDB10227E4C9A0049B59C /* Bang.sks */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -187,15 +193,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EEDB0F227E4AD00049B59C /* Fwoosh.sks in Resources */,
 				5836D33322347513005D1CC3 /* Sprites.atlas in Resources */,
+				85EEDB11227E4C9A0049B59C /* Bang.sks in Resources */,
 				58AA5D892232146E00D85468 /* Main.storyboard in Resources */,
+				85EEDB09227E3AD70049B59C /* Poof.sks in Resources */,
 				58AA5D8B2232147100D85468 /* Assets.xcassets in Resources */,
 				58AA5D8E2232147100D85468 /* LaunchScreen.storyboard in Resources */,
 				8555D722227505C700A845A4 /* BallEffect.sks in Resources */,
 				85C079282263ECD300989646 /* GameScene.sks in Resources */,
 				8555D723227505C700A845A4 /* Assets.xcassets in Resources */,
 				58AA5D822232146E00D85468 /* Actions.sks in Resources */,
-				8555D72522750BA200A845A4 /* SwipePoint.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

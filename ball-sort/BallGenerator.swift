@@ -14,7 +14,7 @@ class BallGenerator {
     
     //  How many ms until next new ball
     let basePeriod = 1000
-    let minPeriod = 250
+    let minPeriod = 400
     
     //  Higher level means balls spawn more frequently
     let levelMultiplier = 200
@@ -26,7 +26,7 @@ class BallGenerator {
     
     //  Where the last ball was spawned, next ball shouldn't be too close
     var lastSpawnX: Float = 0
-    let minDistanceFromLastSpawn: Float = 100
+    let minDistanceFromLastSpawn: Float = 50
     
     let delegate: VCDelegate
     

@@ -106,7 +106,7 @@ class GameScene: SKScene {
             return
         }
         particles.particleColor = SystemColors[ball.color.colorName]!
-        particles.targetNode = self
+        particles.targetNode = sprite
         sprite.addChild(particles)
 
         //  If particles loaded, don't need ball texture
