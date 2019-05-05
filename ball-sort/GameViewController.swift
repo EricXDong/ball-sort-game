@@ -14,6 +14,7 @@ protocol VCDelegate {
     func didTick()
     func newBall(ball: Ball)
     func getCurrentLevel() -> Int
+    func getLevelColors() -> (Color, Color)
     func setLevelColors(colors: (Color, Color))
 }
 
@@ -39,14 +40,15 @@ class GameViewController: UIViewController, VCDelegate {
     @IBOutlet var gameOverLabel: UILabel!
     @IBOutlet var playAgainButton: UIButton!
     
-    //  GAME INIT
+    ///  GAME INIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gameOverGroup.isHidden = true
         
-        //  DON'T LET ME GET INTO PRODUCTION!!!
-        self.userData.removeObject(forKey: UserDataKeys.HighScore)
+        //  Hide the labels at start
+        self.scoreLabel.alpha = 0
+        self.highScoreLabel.alpha = 0
         
         //  High score stuff
         self.highScore = self.userData.integer(forKey: UserDataKeys.HighScore)
@@ -61,7 +63,6 @@ class GameViewController: UIViewController, VCDelegate {
         self.scene.initalize(view: self.view!)
         self.scene.scaleMode = .aspectFill
         self.scene.vcDelegate = self
-        self.scene.startTicking()
         
         //  Set up ball generator
         self.ballGen = BallGenerator(
@@ -72,9 +73,10 @@ class GameViewController: UIViewController, VCDelegate {
         //  Set up the game engine
         self.engine = GameEngine(delegate: self)
         self.scoreLabel.text = String(self.engine.score)
-        
-        self.ballGen.startGenerating()
+
+        //  Present and run start sequence
         view.presentScene(self.scene)
+        self._runStartSequence()
     }
 
     override var shouldAutorotate: Bool {
@@ -85,7 +87,23 @@ class GameViewController: UIViewController, VCDelegate {
         return true
     }
     
-    //  DELEGATE METHODS
+    //  Runs the animations for game start
+    func _runStartSequence() {
+        //  In seconds
+        let sequenceTime = 1.25
+        self.scene.runStartSequence(colors: self.getLevelColors(), time: sequenceTime)
+        Timer.scheduledTimer(withTimeInterval: sequenceTime, repeats: false) { _ in
+            self.scene.startTicking()
+            self.ballGen.startGenerating()
+            //  Also fade in the labels
+            UIView.animate(withDuration: 0.5, animations: {
+                self.scoreLabel.alpha = 1.0
+                self.highScoreLabel.alpha = 1.0
+            })
+        }
+    }
+    
+    ///  DELEGATE METHODS
     
     func didTick() {
         self.scoreLabel.text = String(self.engine.score)
@@ -126,21 +144,36 @@ class GameViewController: UIViewController, VCDelegate {
         self.scene.setLevelColors(colors: colors)
     }
     
-    //  HANDLING BALLS
+    func getLevelColors() -> (Color, Color) {
+        return self.engine.levelColors
+    }
+
+    ///  HANDLING BALLS
     
     func removeBallFromScene(ball: Ball) {
         self.engine.removeBallByKey(key: ball.id)
         ball.sprite.removeFromParent()
     }
     
-    //  Return the first ball that intersects point, or nil if none
+    //  Return the ball that intersects point the closest, or nil if none
     func getBallAtPoint(point: CGPoint) -> Ball? {
-        for (_, ball) in self.engine.balls {
-            if ball.sprite.frame.contains(point) {
-                return ball
+        //  All intersected balls
+        let intersected = self.engine.balls
+            .map { $1 }
+            .filter { ball in ball.sprite.frame.contains(point) }
+        
+        //  Find closest one
+        var closestBall: Ball? = nil
+        var closestDistance = 1000.0
+        for ball in intersected {
+            let distance = Double(point.distance(point: ball.sprite.position))
+            if distance < closestDistance {
+                closestDistance = distance
+                closestBall = ball
             }
         }
-        return nil
+        
+        return closestBall
     }
     
     //  Get the ball that was swiped, or nil if none
@@ -152,8 +185,9 @@ class GameViewController: UIViewController, VCDelegate {
         return self.getBallAtPoint(point: swipePointInScene)
     }
     
-    func spawnSwipeEffects(ball: Ball, toLeft: Bool) {
-        let color = SystemColors[ball.color.colorName]!
+    //  Swipe particle effects
+    func spawnSwipeEffects(ball: Ball, toLeft: Bool, isGameOver: Bool) {
+        let color = isGameOver ? UIColor.red : SystemColors[ball.color.colorName]!
         let position = ball.sprite.position
         let fwooshSpeed = 2000
         
@@ -213,7 +247,7 @@ class GameViewController: UIViewController, VCDelegate {
         ]))
     }
     
-    //  ENDGAME STUFF
+    ///  ENDGAME STUFF
     
     func updateHighScoreLabel() {
         self.highScoreLabel.text = String(self.highScore)
@@ -229,11 +263,10 @@ class GameViewController: UIViewController, VCDelegate {
         
         self.scene.gameOver()
         self.engine.gameOver()
-        self.scoreLabel.text = String(self.engine.score)
         self.gameOverGroup.isHidden = false
     }
     
-    //  USER INTERACTIONS
+    ///  USER INTERACTIONS
     
     //  Ball swiping
     @IBAction func onSwipeRight(_ sender: UISwipeGestureRecognizer) {
@@ -241,14 +274,13 @@ class GameViewController: UIViewController, VCDelegate {
             return
         }
         
-        self.spawnSwipeEffects(ball: swipedBall, toLeft: false)
+        let isGameOver = swipedBall.color != self.engine.levelColors.1
+        self.spawnSwipeEffects(ball: swipedBall, toLeft: false, isGameOver: isGameOver)
         
-        if (swipedBall.color == self.engine.levelColors.1) {
-            //  Correct swipe
-            self.engine.addPoint()
-            
-        } else {
+        if (isGameOver) {
             self.gameOver()
+        } else {
+            self.engine.addPoint()
         }
         self.removeBallFromScene(ball: swipedBall)
     }
@@ -259,13 +291,13 @@ class GameViewController: UIViewController, VCDelegate {
             return
         }
         
-        self.spawnSwipeEffects(ball: swipedBall, toLeft: true)
+        let isGameOver = swipedBall.color != self.engine.levelColors.0
+        self.spawnSwipeEffects(ball: swipedBall, toLeft: true, isGameOver: isGameOver)
         
-        if (swipedBall.color == self.engine.levelColors.0) {
-            //  Correct swipe
-            self.engine.addPoint()
-        } else {
+        if (isGameOver) {
             self.gameOver()
+        } else {
+            self.engine.addPoint()
         }
         self.removeBallFromScene(ball: swipedBall)
     }

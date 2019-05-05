@@ -14,7 +14,7 @@ class BallGenerator {
     
     //  How many ms until next new ball
     let basePeriod = 1000
-    let minPeriod = 400
+    let minPeriod = 300
     
     //  Higher level means balls spawn more frequently
     let levelMultiplier = 200

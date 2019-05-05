@@ -14,13 +14,12 @@ let SystemColors: [String: UIColor] = [
     "green": UIColor.green,
     "orange": UIColor.orange,
     "pink": UIColor.init(red: 1, green: 0.078, blue: 0.576, alpha: 1.0),
-    "red": UIColor.red,
     "teal": UIColor.cyan,
     "yellow": UIColor.yellow
 ]
 
 enum Color: Int, CaseIterable {
-    case Blue = 0, Green, Orange, Pink, Red, Teal, Yellow
+    case Blue = 0, Green, Orange, Pink, Teal, Yellow
     
     var colorName: String {
         switch self {
@@ -32,8 +31,6 @@ enum Color: Int, CaseIterable {
             return "orange"
         case .Pink:
             return "pink"
-        case .Red:
-            return "red"
         case .Teal:
             return "teal"
         case .Yellow:

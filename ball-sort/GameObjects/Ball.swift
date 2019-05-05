@@ -13,7 +13,7 @@ class Ball {
     var color: Color
     var startingPosition: CGPoint
     
-    var sprite: SKSpriteNode!
+    var sprite: SKNode!
     
     var name: String {
         return self.color.colorName

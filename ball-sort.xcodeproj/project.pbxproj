@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5836D33322347513005D1CC3 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5836D33222347512005D1CC3 /* Sprites.atlas */; };
 		5836D33522348C6D005D1CC3 /* BallGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5836D33422348C6D005D1CC3 /* BallGenerator.swift */; };
 		58AA5D7E2232146E00D85468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA5D7D2232146E00D85468 /* AppDelegate.swift */; };
 		58AA5D822232146E00D85468 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 58AA5D812232146E00D85468 /* Actions.sks */; };
@@ -25,10 +24,10 @@
 		85EEDB09227E3AD70049B59C /* Poof.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB08227E3AD70049B59C /* Poof.sks */; };
 		85EEDB0F227E4AD00049B59C /* Fwoosh.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB0E227E4AD00049B59C /* Fwoosh.sks */; };
 		85EEDB11227E4C9A0049B59C /* Bang.sks in Resources */ = {isa = PBXBuildFile; fileRef = 85EEDB10227E4C9A0049B59C /* Bang.sks */; };
+		85F1A35D227F9E81003A14A3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1A35C227F9E81003A14A3 /* CGPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5836D33222347512005D1CC3 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 		5836D33422348C6D005D1CC3 /* BallGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGenerator.swift; sourceTree = "<group>"; };
 		58AA5D7A2232146E00D85468 /* ball-sort.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ball-sort.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AA5D7D2232146E00D85468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +47,7 @@
 		85EEDB08227E3AD70049B59C /* Poof.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poof.sks; sourceTree = "<group>"; };
 		85EEDB0E227E4AD00049B59C /* Fwoosh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fwoosh.sks; sourceTree = "<group>"; };
 		85EEDB10227E4C9A0049B59C /* Bang.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bang.sks; sourceTree = "<group>"; };
+		85F1A35C227F9E81003A14A3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +80,7 @@
 		58AA5D7C2232146E00D85468 /* ball-sort */ = {
 			isa = PBXGroup;
 			children = (
+				85F1A35B227F9E6F003A14A3 /* Extensions */,
 				8555D71F227504F800A845A4 /* Effects */,
 				85C079262263ECA600989646 /* Scenes */,
 				58AA5DB822334A9A00D85468 /* Const */,
@@ -90,7 +91,6 @@
 				58AA5D852232146E00D85468 /* GameViewController.swift */,
 				58AA5D872232146E00D85468 /* Main.storyboard */,
 				58AA5D8A2232147100D85468 /* Assets.xcassets */,
-				5836D33222347512005D1CC3 /* Sprites.atlas */,
 				58AA5D8C2232147100D85468 /* LaunchScreen.storyboard */,
 				58AA5D8F2232147100D85468 /* Info.plist */,
 				58AA5DB1223216ED00D85468 /* GameEngine.swift */,
@@ -133,6 +133,14 @@
 				85C079272263ECD300989646 /* GameScene.sks */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		85F1A35B227F9E6F003A14A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				85F1A35C227F9E81003A14A3 /* CGPoint.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EEDB0F227E4AD00049B59C /* Fwoosh.sks in Resources */,
-				5836D33322347513005D1CC3 /* Sprites.atlas in Resources */,
 				85EEDB11227E4C9A0049B59C /* Bang.sks in Resources */,
 				58AA5D892232146E00D85468 /* Main.storyboard in Resources */,
 				85EEDB09227E3AD70049B59C /* Poof.sks in Resources */,
@@ -218,6 +225,7 @@
 				58AA5D862232146E00D85468 /* GameViewController.swift in Sources */,
 				58AA5DB7223348DF00D85468 /* Ball.swift in Sources */,
 				58AA5D7E2232146E00D85468 /* AppDelegate.swift in Sources */,
+				85F1A35D227F9E81003A14A3 /* CGPoint.swift in Sources */,
 				5836D33522348C6D005D1CC3 /* BallGenerator.swift in Sources */,
 				58AA5DB2223216ED00D85468 /* GameEngine.swift in Sources */,
 				58AA5DBA22334ADC00D85468 /* Color.swift in Sources */,
