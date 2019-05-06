@@ -111,21 +111,10 @@ class GameViewController: UIViewController, VCDelegate {
         //  Keep generating balls
         self.ballGen.tick()
         
-        //  Clean up balls that have gone off screen
-        var balls: [Ball] = []
-        for (_, ball) in self.engine.balls {
-            balls.append(ball)
-        }
-        let (offscreenBalls, isOffBottomScreen) = self.scene.getOffscreenBalls(balls)
-        
-        //  First check if game over
-        if isOffBottomScreen {
+        //  Game over if ball hits bottom of screen
+        let isBallInPit = self.scene.isBallInPit(self.engine.balls.map { $1 })
+        if isBallInPit {
             self.gameOver()
-            return
-        }
-        
-        for ball in offscreenBalls {
-            self.removeBallFromScene(ball: ball)
         }
     }
     
@@ -227,15 +216,6 @@ class GameViewController: UIViewController, VCDelegate {
             ]))
         }
         
-        //  Bang effect
-        let spawnBang = {() in
-            let bang = SKEmitterNode(fileNamed: "Bang")!
-            bang.particleColor = color
-            bang.position = CGPoint(x: toLeft ? 0 : self.scene.size.width, y: position.y)
-            bang.targetNode = self.scene
-            self.scene.addChild(bang)
-        }
-        
         //  Calculate when to spawn the bang based on position and velocity
         let distance = toLeft ? position.x : self.scene.size.width - position.x
         let timeToSpawnBang = Double(distance) / Double(fwooshSpeed)
@@ -243,8 +223,19 @@ class GameViewController: UIViewController, VCDelegate {
         self.scene.run(SKAction.sequence([
             SKAction.run { spawnFwoosh() },
             SKAction.wait(forDuration: timeToSpawnBang),
-            SKAction.run { spawnBang() }
+            SKAction.run {
+                self.spawnBang(position: CGPoint(x: toLeft ? 0 : self.scene.size.width, y: position.y), color: color)
+            }
         ]))
+    }
+    
+    //  Bang!!
+    func spawnBang(position: CGPoint, color: UIColor) {
+        let bang = SKEmitterNode(fileNamed: "Bang")!
+        bang.particleColor = color
+        bang.position = position
+        bang.targetNode = self.scene
+        self.scene.addChild(bang)
     }
     
     ///  ENDGAME STUFF
@@ -260,6 +251,10 @@ class GameViewController: UIViewController, VCDelegate {
             self.updateHighScoreLabel()
             self.userData.set(self.highScore, forKey: UserDataKeys.HighScore)
         }
+        
+        self.engine.balls
+            .map { $1 }
+            .forEach { self.spawnBang(position: $0.sprite.position, color: UIColor.red) }
         
         self.scene.gameOver()
         self.engine.gameOver()

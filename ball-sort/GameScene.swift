@@ -50,11 +50,9 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        //  Game can be paused
         if !self.isTicking {
             return
         }
-        
         self.vcDelegate!.didTick()
     }
     
@@ -74,13 +72,15 @@ class GameScene: SKScene {
             SKAction.wait(forDuration: time),
             SKAction.fadeAlpha(to: 0.5, duration: 1.0),
             SKAction.wait(forDuration: 4.0),
-            SKAction.fadeAlpha(to: 0, duration: 1.0)
+            SKAction.fadeAlpha(to: 0, duration: 1.0),
+            SKAction.removeFromParent()
         ]))
         self.pitHelp.run(SKAction.sequence([
             SKAction.wait(forDuration: time),
             SKAction.fadeAlpha(to: 0.5, duration: 1.0),
             SKAction.wait(forDuration: 4.0),
-            SKAction.fadeAlpha(to: 0, duration: 1.0)
+            SKAction.fadeAlpha(to: 0, duration: 1.0),
+            SKAction.removeFromParent()
         ]))
     }
     
@@ -109,12 +109,9 @@ class GameScene: SKScene {
         sprite.addChild(particles)
     }
     
-    //  Returns IDs of balls off screen
-    func getOffscreenBalls(_ balls: [Ball]) -> ([Ball], Bool) {
-        //  y positions are negative
-        let allOffscreen = balls.filter { !self.intersects($0.sprite!) }
-        let isOffBottomScreen = allOffscreen.contains { $0.sprite.position.y < -self.size.height }
-        return (allOffscreen, isOffBottomScreen)
+    //  True if a ball hits bottom of screen
+    func isBallInPit(_ balls: [Ball]) -> Bool {
+        return balls.contains { $0.sprite.position.y < -self.size.height }
     }
     
     //  Set colors of walls
