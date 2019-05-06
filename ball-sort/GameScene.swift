@@ -17,6 +17,9 @@ class GameScene: SKScene {
     var leftWall: SKSpriteNode!
     var rightWall: SKSpriteNode!
     
+    var swipeHelp: SKNode!
+    var pitHelp: SKNode!
+    
     var vcDelegate: VCDelegate?
     
     var isTicking: Bool = false
@@ -29,9 +32,19 @@ class GameScene: SKScene {
         self.addChild(self.gameLayer)
         self.gameLayer.addChild(self.ballLayer)
         
+        //  Wall setup
         self.leftWall = getWallBy(name: "LeftWall")
         self.rightWall = getWallBy(name: "RightWall")
         self.rightWall.position.x = self.size.width - self.rightWall.size.width
+        
+        //  Help text setup
+        let centerX = self.size.width / 2
+        self.swipeHelp = self.scene?.childNode(withName: "SwipeHelp")
+        self.pitHelp = self.scene?.childNode(withName: "PitHelp")
+        self.swipeHelp.position = CGPoint(x: centerX, y: -(self.size.height - 300))
+        self.pitHelp.position = CGPoint(x: centerX, y: -(self.size.height - 50))
+        self.pitHelp.alpha = 0
+        self.swipeHelp.alpha = 0
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
@@ -55,6 +68,20 @@ class GameScene: SKScene {
         let y = -self.size.height - 600
         self.leftWall.run(SKAction.move(to: CGPoint(x: self.leftWall.position.x, y: y), duration: time))
         self.rightWall.run(SKAction.move(to: CGPoint(x: self.rightWall.position.x, y: y), duration: time))
+        
+        //  Fade help text in and out
+        self.swipeHelp.run(SKAction.sequence([
+            SKAction.wait(forDuration: time),
+            SKAction.fadeAlpha(to: 0.5, duration: 1.0),
+            SKAction.wait(forDuration: 4.0),
+            SKAction.fadeAlpha(to: 0, duration: 1.0)
+        ]))
+        self.pitHelp.run(SKAction.sequence([
+            SKAction.wait(forDuration: time),
+            SKAction.fadeAlpha(to: 0.5, duration: 1.0),
+            SKAction.wait(forDuration: 4.0),
+            SKAction.fadeAlpha(to: 0, duration: 1.0)
+        ]))
     }
     
     //  New ball
@@ -68,7 +95,7 @@ class GameScene: SKScene {
         //  Physics shit
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 1)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -100)
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -120)
         sprite.physicsBody?.categoryBitMask = 0x1 << 1
         sprite.physicsBody?.collisionBitMask = 0
         

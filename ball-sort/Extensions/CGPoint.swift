@@ -12,6 +12,7 @@ extension CGPoint {
     
     /**
      Calculates a distance to the given point.
+     https://stackoverflow.com/questions/21251706/ios-spritekit-how-to-calculate-the-distance-between-two-nodes
      
      :param: point - the point to calculate a distance to
      
