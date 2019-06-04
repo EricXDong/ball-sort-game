@@ -16,6 +16,7 @@ protocol VCDelegate {
     func getCurrentLevel() -> Int
     func getLevelColors() -> (Color, Color)
     func setLevelColors(colors: (Color, Color))
+    func getBallSpeedIncrease() -> Int
 }
 
 //  For storing high score on device
@@ -60,9 +61,8 @@ class GameViewController: UIViewController, VCDelegate {
         
         //  Set up scene in view
         self.scene = GameScene(fileNamed: "GameScene")
-        self.scene.initalize(view: self.view!)
+        self.scene.initalize(delegate: self)
         self.scene.scaleMode = .aspectFill
-        self.scene.vcDelegate = self
         
         //  Set up ball generator
         self.ballGen = BallGenerator(
@@ -135,6 +135,10 @@ class GameViewController: UIViewController, VCDelegate {
     
     func getLevelColors() -> (Color, Color) {
         return self.engine.levelColors
+    }
+    
+    func getBallSpeedIncrease() -> Int {
+        return self.engine.getBallSpeedIncrease()
     }
 
     ///  HANDLING BALLS

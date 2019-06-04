@@ -20,12 +20,13 @@ class GameScene: SKScene {
     var swipeHelp: SKNode!
     var pitHelp: SKNode!
     
-    var vcDelegate: VCDelegate?
+    var vcDelegate: VCDelegate!
     
     var isTicking: Bool = false
     
     //  Avoid weird inherited constructor funkiness
-    func initalize(view: UIView) {
+    func initalize(delegate: VCDelegate) {
+        self.vcDelegate = delegate
         self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         self.anchorPoint = CGPoint(x: 0, y: 1)
         
@@ -53,7 +54,7 @@ class GameScene: SKScene {
         if !self.isTicking {
             return
         }
-        self.vcDelegate!.didTick()
+        self.vcDelegate.didTick()
     }
     
     //  Get wall by name
@@ -95,7 +96,7 @@ class GameScene: SKScene {
         //  Physics shit
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: 1)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -120)
+        sprite.physicsBody?.velocity = CGVector(dx: 0, dy: -120 - self.vcDelegate.getBallSpeedIncrease())
         sprite.physicsBody?.categoryBitMask = 0x1 << 1
         sprite.physicsBody?.collisionBitMask = 0
         

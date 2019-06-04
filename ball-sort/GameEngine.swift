@@ -9,6 +9,7 @@
 import Foundation
 
 let pointsPerLevel = 10
+let maxSpeedIncrease = 20
 
 class GameEngine {
     var score: Int
@@ -57,6 +58,12 @@ class GameEngine {
         if self.score % pointsPerLevel == 0 {
             self.currentLevel += 1
         }
+    }
+    
+    //  Increase speed every 25 points
+    func getBallSpeedIncrease() -> Int {
+        let speedIncrease = (self.score / 25) * 5
+        return speedIncrease < maxSpeedIncrease ? speedIncrease : maxSpeedIncrease
     }
     
     //  Clean up and reset
